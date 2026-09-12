@@ -1,4 +1,4 @@
-package com.example.info;
+package com.example.demo.info;
 
 import org.springframework.beans.factory.BeanRegistrar;
 import org.springframework.beans.factory.BeanRegistry;

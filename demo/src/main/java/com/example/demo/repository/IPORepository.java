@@ -2,7 +2,7 @@ package com.example.demo.repository;
 
 import org.springframework.stereotype.Repository;
 
-import example.info.pojo.IPO;
+import com.example.demo.pojo.IPO;
 
 
 @Repository

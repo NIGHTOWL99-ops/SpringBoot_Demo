@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.pojo.IPO;
 import com.example.demo.services.IPOService;
-
-import example.info.pojo.IPO;
 
 @RestController
 @RequestMapping("/ipos") 
