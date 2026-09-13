@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Define the IPOAllotmentProcess bean -->
+    <bean id="IPOAllotmentProcess" class="com.example.demo.xmlconfig.IPOAllotmentProcess">
+        <!-- Inject a value into the 'sharesInvestedAmount' property using its setter -->
+        <property name="sharesInvestedAmount" value="444999" />
+    </bean>
+
+</beans>
