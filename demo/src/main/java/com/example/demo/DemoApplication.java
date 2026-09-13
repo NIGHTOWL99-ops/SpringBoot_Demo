@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,6 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.interceptor.MatchAlwaysTransactionAttributeSource;
+import org.springframework.transaction.interceptor.RollbackRuleAttribute;
+import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute;
+import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 import com.example.demo.xmlconfig.IPOAllotmentProcess;
 
@@ -60,6 +66,25 @@ public class DemoApplication {
             
             System.out.println("Total Beans Registered: " + beanNames.length);
         };
+    }
+	
+	@Bean
+    public TransactionInterceptor transactionInterceptor(PlatformTransactionManager transactionManager) {
+        // Define transactional behaviors (e.g., PROPAGATION_REQUIRED, rollback on all Exceptions)
+        RuleBasedTransactionAttribute txAttribute = new RuleBasedTransactionAttribute();
+        txAttribute.setPropagationBehavior(RuleBasedTransactionAttribute.PROPAGATION_REQUIRED);
+        txAttribute.setRollbackRules(Collections.singletonList(new RollbackRuleAttribute(Exception.class)));
+
+        // Match those behaviors to your methods/classes
+        MatchAlwaysTransactionAttributeSource attributeSource = new MatchAlwaysTransactionAttributeSource();
+        attributeSource.setTransactionAttribute(txAttribute);
+
+        // Instantiate the custom interceptor tied to your transaction manager
+        TransactionInterceptor interceptor = new TransactionInterceptor();
+        interceptor.setTransactionManager(transactionManager);
+        interceptor.setTransactionAttributeSource(attributeSource);
+        
+        return interceptor;
     }
 
 }
