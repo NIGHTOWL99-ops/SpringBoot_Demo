@@ -31,8 +31,11 @@ public class DemoApplication {
         
        System.out.println("=====================================");
        System.out.println("All Beans in XML File");
-       System.out.println("======================================"+count);
+       System.out.println("======================================");
+       System.out.println("=============="+count+"===============");
   
+       
+       System.out.println("============================================================");
        
 		SpringApplication.run(DemoApplication.class, args);
 	}
