@@ -22,12 +22,7 @@ public class IPOController {
 	@Autowired
 	IPOAcceptanceService ser;
 	
-	/*
-	 * @Autowired InfoOnSpringTransaction in;
-	 */
 	
-	
-	//TransactionStatus ts;
 	
 	@Autowired
 	UserRepository userrepo;
