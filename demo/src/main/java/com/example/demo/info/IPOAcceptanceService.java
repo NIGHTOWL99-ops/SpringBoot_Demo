@@ -17,10 +17,12 @@ public class IPOAcceptanceService {
         // Mutate some state or hit an external API
         
 		
-		/*
-		 * if (someFailureConditionIsTrue()) { throw new
-		 * RuntimeException("Something went wrong!"); // Triggers custom rollback }
-		 */
+		
+		  if (someFailureConditionIsTrue()) { throw new
+		  RuntimeException("Something went wrong!"); // Triggers custom rollback 
+		  
+		  }
+		 
 		 
     }
     

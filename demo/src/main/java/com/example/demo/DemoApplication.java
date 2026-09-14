@@ -68,23 +68,27 @@ public class DemoApplication {
         };
     }
 	
-	@Bean
-    public TransactionInterceptor transactionInterceptor(PlatformTransactionManager transactionManager) {
-        // Define transactional behaviors (e.g., PROPAGATION_REQUIRED, rollback on all Exceptions)
-        RuleBasedTransactionAttribute txAttribute = new RuleBasedTransactionAttribute();
-        txAttribute.setPropagationBehavior(RuleBasedTransactionAttribute.PROPAGATION_REQUIRED);
-        txAttribute.setRollbackRules(Collections.singletonList(new RollbackRuleAttribute(Exception.class)));
-
-        // Match those behaviors to your methods/classes
-        MatchAlwaysTransactionAttributeSource attributeSource = new MatchAlwaysTransactionAttributeSource();
-        attributeSource.setTransactionAttribute(txAttribute);
-
-        // Instantiate the custom interceptor tied to your transaction manager
-        TransactionInterceptor interceptor = new TransactionInterceptor();
-        interceptor.setTransactionManager(transactionManager);
-        interceptor.setTransactionAttributeSource(attributeSource);
-        
-        return interceptor;
-    }
-
-}
+	/*
+	 * @Bean public TransactionInterceptor
+	 * transactionInterceptor(PlatformTransactionManager transactionManager) { //
+	 * Define transactional behaviors (e.g., PROPAGATION_REQUIRED, rollback on all
+	 * Exceptions) RuleBasedTransactionAttribute txAttribute = new
+	 * RuleBasedTransactionAttribute();
+	 * txAttribute.setPropagationBehavior(RuleBasedTransactionAttribute.
+	 * PROPAGATION_REQUIRED);
+	 * txAttribute.setRollbackRules(Collections.singletonList(new
+	 * RollbackRuleAttribute(Exception.class)));
+	 * 
+	 * // Match those behaviors to your methods/classes
+	 * MatchAlwaysTransactionAttributeSource attributeSource = new
+	 * MatchAlwaysTransactionAttributeSource();
+	 * attributeSource.setTransactionAttribute(txAttribute);
+	 * 
+	 * // Instantiate the custom interceptor tied to your transaction manager
+	 * TransactionInterceptor interceptor = new TransactionInterceptor();
+	 * interceptor.setTransactionManager(transactionManager);
+	 * interceptor.setTransactionAttributeSource(attributeSource);
+	 * 
+	 * return interceptor; }
+	 * 
+	 */}

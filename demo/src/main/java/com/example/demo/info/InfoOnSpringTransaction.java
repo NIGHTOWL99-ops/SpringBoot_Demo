@@ -10,7 +10,7 @@ import org.springframework.transaction.support.SimpleTransactionStatus;
 
 
 @Component
-//@Transactional
+
 public class InfoOnSpringTransaction implements  PlatformTransactionManager {
 	
 	
