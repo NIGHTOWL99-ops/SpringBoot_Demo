@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +68,30 @@ public class IPOController {
 		 return userrepo.save(ipoUser);
      }
 	  
+	@PostMapping("/saveAllIPOUsers")
+    public Iterable<IPOUser> saveUsers(@RequestBody List<IPOUser> PhNumbers) {
+        return userrepo.saveAll(PhNumbers);
+        
+    }
+	
+	@PostMapping("/updateIPOUser")
+    public IPOUser updateIPOUsers(@RequestBody IPOUser ipouser) {
+		//Optional<IPOUser> optionalUser = userrepo.findById(ipouser.getId());
+
+        IPOUser finalIpouser=null;
+        	Iterable<IPOUser> existingUser = userrepo.findAll();
+        	if(existingUser.iterator().hasNext()) {
+        		IPOUser user= existingUser.iterator().next();
+        		
+        		finalIpouser=userrepo.save(user);
+        		
+        	}
+            
+        	
+        return finalIpouser;
+    }
+        
+    
 	
 	@GetMapping 
 	// Or @PostMapping, depending on your request

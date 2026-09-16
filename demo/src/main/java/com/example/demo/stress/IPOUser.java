@@ -1,5 +1,7 @@
 package com.example.demo.stress;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,14 +14,31 @@ public class IPOUser {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String name;
+    private Long id;
+    public void setId(Long id) {
+		this.id = id;
+	}
 
-    // Default constructor required by JPA
+	public void setName(String name) {
+		this.name = name;
+	}
+	private String name;
+    private List<String> PhNumbers;
+    
+    
+    public List<String> getPhNumbers() {
+		return PhNumbers;
+	}
+
+	public void setPhNumbers(List<String> phNumbers) {
+		PhNumbers = phNumbers;
+	}
+
+	// Default constructor required by JPA
     public IPOUser() {} 
 
     public IPOUser(String name) { this.name = name; }
-    public Integer getId() { return id; }
+    public Long getId() { return id; }
     public String getName() { return name; }
 
 }
