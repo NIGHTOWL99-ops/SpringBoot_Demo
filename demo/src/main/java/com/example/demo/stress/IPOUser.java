@@ -23,14 +23,16 @@ public class IPOUser {
 		this.name = name;
 	}
 	private String name;
-    private List<String> PhNumbers;
+    private String PhNumbers;
     
     
-    public List<String> getPhNumbers() {
+    
+
+	public String getPhNumbers() {
 		return PhNumbers;
 	}
 
-	public void setPhNumbers(List<String> phNumbers) {
+	public void setPhNumbers(String phNumbers) {
 		PhNumbers = phNumbers;
 	}
 

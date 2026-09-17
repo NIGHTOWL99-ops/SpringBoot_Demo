@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.info.IPOAcceptanceService;
 import com.example.demo.pojo.IPO;
+import com.example.demo.repository.BookRepository;
 import com.example.demo.services.IPOService;
 import com.example.demo.stress.IPOUser;
 import com.example.demo.stress.UserRepository;
@@ -36,7 +37,8 @@ public class IPOController {
 	@Autowired
 	UserRepository userrepo;
 	
-
+    @Autowired
+    BookRepository br;
 	
 	/*
 	 * @Autowired InfoOnSpringTransaction trx;
@@ -100,13 +102,16 @@ public class IPOController {
         
     }
 	
-	
-	
-	
 	@GetMapping 
 	// Or @PostMapping, depending on your request
     public ResponseEntity<?> getIpos() {
         return ResponseEntity.ok("Success");
+    }
+	
+	@PostMapping("/altuser")
+    public String createBook(@RequestBody IPOUser ipo) {
+        int result = br.save(ipo);
+        return result > 0 ? "Book created successfully!" : "Failed to create book.";
     }
 
 
