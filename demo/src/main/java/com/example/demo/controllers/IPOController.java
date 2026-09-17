@@ -1,13 +1,15 @@
 package com.example.demo.controllers;
 
+
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +36,8 @@ public class IPOController {
 	@Autowired
 	UserRepository userrepo;
 	
+
+	
 	/*
 	 * @Autowired InfoOnSpringTransaction trx;
 	 */
@@ -54,13 +58,35 @@ public class IPOController {
 	  }
 	  
 		
-	@GetMapping("/uname") //
-    public List<IPOUser> fetchIPOUser(@RequestParam String uname) {
+		
+		  @GetMapping("/uname")
+		  public List<IPOUser> fetchIPOUser(@RequestParam String uname) {
 		  
-		 return userrepo.findByName( uname);
+		       return userrepo.findByName( uname);
 		  
 		  }
-	
+		 
+	  @DeleteMapping("/delete/{id}")
+		  public boolean deleteUser(@PathVariable Long id) {
+		        if (userrepo.existsById(id)){
+		        	userrepo.deleteById(id); // Deletes the record
+		            return true;
+		        }
+		        return false; // Record not found
+		    }
+	  
+	  
+	  @PutMapping("/update/{id}")
+	  public boolean updateuserIPO(@RequestBody IPOUser ip,@PathVariable Long id) {
+	        if (userrepo.existsById(id)){
+	        	ip.setId(id);
+	        	userrepo.save(ip) ;// Deletes the record
+	            return true;
+	        }
+	        return false; // Record not found
+	    }
+		
+	  
 	@PostMapping
 	public IPOUser addIPOUser(@RequestBody IPOUser ipoUser) {
 			  
@@ -74,24 +100,8 @@ public class IPOController {
         
     }
 	
-	@PostMapping("/updateIPOUser")
-    public IPOUser updateIPOUsers(@RequestBody IPOUser ipouser) {
-		//Optional<IPOUser> optionalUser = userrepo.findById(ipouser.getId());
-
-        IPOUser finalIpouser=null;
-        	Iterable<IPOUser> existingUser = userrepo.findAll();
-        	if(existingUser.iterator().hasNext()) {
-        		IPOUser user= existingUser.iterator().next();
-        		
-        		finalIpouser=userrepo.save(user);
-        		
-        	}
-            
-        	
-        return finalIpouser;
-    }
-        
-    
+	
+	
 	
 	@GetMapping 
 	// Or @PostMapping, depending on your request

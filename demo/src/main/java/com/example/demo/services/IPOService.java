@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.pojo.IPO;
 import com.example.demo.repository.IPORepository;
+import com.example.demo.stress.UserRepository;
 
 @Service
 public class IPOService {
@@ -15,6 +16,10 @@ public class IPOService {
 	public IPO getIPObyID(String name) {
 		
 		return repository.getIPObyID();
+		
+		
+
+	    
 		
 	}
 
