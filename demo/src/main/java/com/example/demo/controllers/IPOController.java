@@ -108,6 +108,12 @@ public class IPOController {
         return ResponseEntity.ok("Success");
     }
 	
+	@GetMapping("/fetchName/{name}")
+	public List<IPOUser> fetchUsers(@PathVariable String name){
+		
+		return userrepo.findUsersByName(name);
+	}
+	
 	@PostMapping("/altuser")
     public String createBook(@RequestBody IPOUser ipo) {
         int result = br.save(ipo);
