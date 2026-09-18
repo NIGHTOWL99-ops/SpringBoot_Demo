@@ -40,6 +40,8 @@ public class IPOController {
     @Autowired
     BookRepository br;
 	
+    
+    
 	/*
 	 * @Autowired InfoOnSpringTransaction trx;
 	 */
@@ -113,7 +115,25 @@ public class IPOController {
 		
 		return userrepo.findUsersByName(name);
 	}
+
+	@GetMapping("/fetchNameNative")
+	public List<IPOUser> fetchUsersNative(@RequestParam String name){
+		
+		return userrepo.searchByNameNative(name);
+	}
 	
+	@GetMapping("/updateNameNative")
+	public int updateUserName(@RequestParam String name,@RequestParam Long id){
+		
+		return userrepo.updateUserName(id,name);
+	}
+	
+	
+	@GetMapping("/fetchNameJPQL/{email}")
+	public IPOUser fetchUserNameJPQL(@PathVariable String email){
+		
+		return userrepo.findUserByEmail(email);
+	}
 	@PostMapping("/altuser")
     public String createBook(@RequestBody IPOUser ipo) {
         int result = br.save(ipo);

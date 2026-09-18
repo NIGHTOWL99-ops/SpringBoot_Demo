@@ -25,8 +25,16 @@ public class IPOUser {
 	private String name;
     private String PhNumbers;
     
+    private String email;
     
-    
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getPhNumbers() {
 		return PhNumbers;
