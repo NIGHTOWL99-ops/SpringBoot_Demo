@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.example.demo.xmlconfig.IPOAllotmentProcess;
 
@@ -62,4 +61,4 @@ public class DemoApplication {
         };
     }
 	
-	}
+}

@@ -84,10 +84,10 @@ public class IPOController {
 	  public boolean updateuserIPO(@RequestBody IPOUser ip,@PathVariable Long id) {
 	        if (userrepo.existsById(id)){
 	        	ip.setId(id);
-	        	userrepo.save(ip) ;// Deletes the record
+	        	userrepo.save(ip) ;
 	            return true;
 	        }
-	        return false; // Record not found
+	        return false; 
 	    }
 		
 	  
