@@ -1,4 +1,4 @@
-package info.google.advaced.auth;
+package com.example.demo.info.google.advaced.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +25,8 @@ public class ModernAuthBasicFiltering {
         http
             .csrf(csrf -> csrf.disable()) // Disable only for stateless APIs
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/public/**").permitAll() // Publicly available
-                .requestMatchers("/api/admin/**").hasRole("ADMIN") // Restricted by Role
+                .requestMatchers("/ipos/**").permitAll() // Publicly available
+                .requestMatchers("/ipos/**").hasRole("ADMIN") // Restricted by Role
                 .anyRequest().authenticated() // Everything else requires authentication
             )
             .formLogin(form -> form.permitAll()) // Enables built-in HTML Form Login
