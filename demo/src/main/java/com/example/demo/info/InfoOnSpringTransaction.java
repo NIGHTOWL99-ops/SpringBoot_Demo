@@ -1,9 +1,5 @@
 package com.example.demo.info;
 
-import javax.sql.DataSource;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -16,13 +12,6 @@ import org.springframework.transaction.support.SimpleTransactionStatus;
 
 public class InfoOnSpringTransaction implements  PlatformTransactionManager {
 	
-	
-	
-	
-	  @Bean(name = "transactionManager") public PlatformTransactionManager
-	  transactionManager(DataSource dataSource) { return new
-	  DataSourceTransactionManager(dataSource); }
-	 
 	
 	
 	@Override

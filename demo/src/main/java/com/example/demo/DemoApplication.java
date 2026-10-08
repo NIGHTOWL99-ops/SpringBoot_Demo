@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.example.demo.info.IPOAcceptanceService;
 import com.example.demo.xmlconfig.IPOAllotmentProcess;
 
 @SpringBootApplication
@@ -16,6 +17,8 @@ import com.example.demo.xmlconfig.IPOAllotmentProcess;
 public class DemoApplication {
 
 	public static void main(String[] args) {
+		
+		
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
