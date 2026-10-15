@@ -1,6 +1,7 @@
 package com.example.demo.info;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -13,7 +14,7 @@ import jakarta.persistence.EntityManagerFactory;
 
 
 @Component
-
+@Primary
 public class InfoOnSpringTransaction implements  PlatformTransactionManager {
 	
 	@Bean(name = "transactionManager")
@@ -23,7 +24,7 @@ public class InfoOnSpringTransaction implements  PlatformTransactionManager {
 	
 	@Override
     public TransactionStatus getTransaction(TransactionDefinition definition) throws TransactionException {
-        System.out.println("▶️ Starting non-database transaction...");
+        System.out.println("▶️ Starting transaction...");
         // You can capture current state snapshots here for later rollbacks
         return new SimpleTransactionStatus();
     }

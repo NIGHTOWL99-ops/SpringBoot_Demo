@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.pojo.IPO;
 import com.example.demo.repository.IPORepository;
@@ -29,7 +30,7 @@ public class IPOService {
 	    
 		
 	}
-	
+	@Transactional
 	public Page<IPOUser> findAllUsers(Pageable pageable) {
         return re.findAll(pageable);
     }
