@@ -1,5 +1,6 @@
 package com.example.demo.info.google.advaced.auth;
 
+import org.springframework.boot.security.autoconfigure.web.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,10 +26,18 @@ public class ModernAuthBasicFiltering {
         http
             .csrf(csrf -> csrf.disable()) // Disable only for stateless APIs
             .authorizeHttpRequests(auth -> auth
+            		.requestMatchers(PathRequest.toH2Console()).permitAll()
+            		
                 .requestMatchers("/ipos/**").permitAll() // Publicly available
                 .requestMatchers("/ipos/**").hasRole("ADMIN") // Restricted by Role
                 .anyRequest().authenticated() // Everything else requires authentication
             )
+            .csrf(csrf -> csrf
+                    .ignoringRequestMatchers("/h2-console/**")
+                )
+            .headers(headers -> headers
+                    .frameOptions(frame -> frame.sameOrigin())
+                )
             .formLogin(form -> form.permitAll()) // Enables built-in HTML Form Login
             .httpBasic(basic -> {}); // Enables Basic Authentication header support
 
