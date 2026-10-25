@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.info.IPOAcceptanceService;
+import com.example.demo.info.google.advaced.auth.UserNotFoundException;
 import com.example.demo.pojo.IPO;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.services.IPOService;
@@ -71,9 +72,17 @@ public class IPOController {
 		  public List<IPOUser> fetchIPOUser(@RequestParam String uname) {
 		  
 		       return userrepo.findByName( uname);
-		  
+		       
+			  
 		  }
-		 
+		  @GetMapping("/checkExceptionGlobal")
+		  public UserNotFoundException checkExceptionGlobal(Exception ex) {
+		  
+			
+		       throw new UserNotFoundException(ex.getMessage());
+			  
+		  }
+		  
 	  @DeleteMapping("/delete/{id}")
 		  public boolean deleteUser(@PathVariable Long id) {
 		        if (userrepo.existsById(id)){
