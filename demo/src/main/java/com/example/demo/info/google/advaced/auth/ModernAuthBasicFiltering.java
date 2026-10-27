@@ -32,8 +32,8 @@ public class ModernAuthBasicFiltering {
             .authorizeHttpRequests(auth -> auth
             		.requestMatchers(PathRequest.toH2Console()).permitAll()
             		
-                .requestMatchers("/ipos/**").permitAll() // Publicly available
-                .requestMatchers("/ipos/**").hasRole("ADMIN") // Restricted by Role
+                .requestMatchers("/api/**").permitAll() // Publicly available
+                .requestMatchers("/ipos/**").permitAll() // Restricted by Role
                 .anyRequest().authenticated() // Everything else requires authentication
             )
             .csrf(csrf -> csrf
