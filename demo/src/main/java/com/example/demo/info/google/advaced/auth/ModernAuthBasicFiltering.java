@@ -1,6 +1,7 @@
 package com.example.demo.info.google.advaced.auth;
 
-import org.springframework.boot.security.autoconfigure.web.servlet.PathRequest;
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,8 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
-
-import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.CorsUtils;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Component
 //@Configuration
@@ -23,60 +26,33 @@ public class ModernAuthBasicFiltering {
 	/*
 	 * --Hey
 	 */	
-	
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+	    CorsConfiguration configuration = new CorsConfiguration();
+	    configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080")); // Your frontend URL
+	    configuration.setAllowedMethods(Arrays.asList( "POST", "PUT", "DELETE", "OPTIONS"));
+	    configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+	    
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", configuration);
+	    return source;
+	}
 	
 	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable()) // Disable only for stateless APIs
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
-            		.requestMatchers(PathRequest.toH2Console()).permitAll()
-            		
-                .requestMatchers("/api/**").permitAll() // Publicly available
-                .requestMatchers("/ipos/**").permitAll() // Restricted by Role
-                .anyRequest().authenticated() // Everything else requires authentication
-            )
-            .csrf(csrf -> csrf
-                    .ignoringRequestMatchers("/h2-console/**")
-                )
-            .headers(headers -> headers
-                    .frameOptions(frame -> frame.sameOrigin())
-                )
-            .formLogin(form -> form.permitAll()) // Enables built-in HTML Form Login
-            .exceptionHandling(exception -> exception
-                    .authenticationEntryPoint((request, response, authException) -> {
-                        response.setContentType("application/json");
-                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                        response.getWriter().write("{\"error\": \"Unauthorized\", \"message\": \"" + authException.getMessage() + "\"}");
-                    }))
-            .httpBasic(basic -> {}); // Enables Basic Authentication header support
+                    .anyRequest().permitAll() // Adjust authorization rules as needed
+                );
 
         return http.build();
     }
-
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        // Simple in-memory user configuration for local development
-        UserDetails admin = User.withUsername("admin")
-                .password(encoder.encode("adminPass"))
-                .roles("ADMIN")
-                .build();
-                
-        UserDetails user = User.withUsername("user")
-                .password(encoder.encode("userPass"))
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(admin, user);
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Securely hashes user passwords
-    }
-    
+	
+	
+	    
    
 }
-
 
 
