@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.info.google.advaced.auth.UserNotFoundException;
 import com.example.demo.pojo.Department;
 import com.example.demo.pojo.Employee;
 import com.example.demo.repository.DepartmentRepository;
@@ -36,7 +37,7 @@ import com.example.demo.repository.DepartmentRepository;
 	    // READ ONE
 	    public Department getDepartmentById(Long id) {
 	        return departmentRepository.findById(id)
-	                .orElseThrow(() -> new RuntimeException("Department not found with id: " + id));
+	                .orElseThrow(() -> new UserNotFoundException("Department not found with id: " + id));
 	    }
 
 	    // UPDATE
